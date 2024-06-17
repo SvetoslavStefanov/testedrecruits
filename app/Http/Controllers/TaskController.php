@@ -57,4 +57,28 @@ class TaskController extends Controller {
 
     return redirect()->route('all-task')->with('success', __('Task created successfully'));
   }
+
+  public function edit(Tasks $task) {
+    return view('tasks/edit', ['task' => $task]);
+  }
+
+  public function update(Request $request, Tasks $task) {
+    $validatedData = $request->validate([
+      'name' => 'required|string',
+      'description' => 'nullable|string',
+      'dueDate' => 'nullable|date',
+      'priority' => 'required|in:high,medium,low',
+      'status' => 'required|in:pending,in_progress,completed,canceled',
+    ]);
+
+    $task->update([
+      'name' => $validatedData['name'],
+      'description' => $validatedData['description'],
+      'due_date' => $validatedData['dueDate'],
+      'priority' => $validatedData['priority'],
+      'status' => $validatedData['status'],
+    ]);
+
+    return redirect()->route('all-task')->with('success', __('Task updated successfully'));
+  }
 }

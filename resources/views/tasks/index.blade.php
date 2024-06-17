@@ -58,7 +58,7 @@
             </span>
           </td>
           <td>
-            <a href="{{ route('edit-task', ['id' => $task->id]) }}" class="btn btn-primary">{{ __('Edit') }}</a>
+            <a href="{{ route('edit-task', $task) }}" class="btn btn-primary">{{ __('Edit') }}</a>
             <button class="btn btn-danger" onclick="confirmDelete({{ $task->id }})">{{ __('Delete') }}</button>
           </td>
         </tr>
