@@ -40,17 +40,26 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ route('show-add-task') }}">{{ __('Add a Task') }}</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('projects.index') }}">{{ __('View all Projects') }}</a>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
 </header>
-<main class="py-2 container ">
+<main class="py-2 container">
+  @if ($message = Session::get('success'))
+    <div class="alert alert-success">
+      <p>{{ $message }}</p>
+    </div>
+  @endif
+
   @yield('content')
 </main>
 </div>
 <footer style="position: absolute; bottom: 0; width: 100%;">
-  <p class="text-center"> &copy; @php echo date('Y')@endphp Tested Recruits | All Rights Reserved.</p>
+  <p class="text-center"> &copy; @php echo date('Y')@endphp {{ __('Tested Recruits | All Rights Reserved.') }}</p>
 </footer>
 
 @yield('scripts')

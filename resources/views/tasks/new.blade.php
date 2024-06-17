@@ -55,6 +55,21 @@
             @enderror
           </div>
 
+          <div class="form-group mt-2">
+            <label>{{ __('Project') }}</label>
+            <select class="form-control @error('project') is-invalid @enderror" name="project_id">
+              <option value="">{{ __('Select Project') }}</option>
+              @foreach ($projects as $project)
+                <option value="{{ $project->id }}" {{ old('project') == $project->id ? 'selected' : '' }}>
+                  {{ $project->name }}
+                </option>
+              @endforeach
+            </select>
+            @error('project')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+          </div>
+
           <button type="submit" class="btn btn-primary mt-2">{{ __('Add Task') }}</button>
         </form>
       </div>

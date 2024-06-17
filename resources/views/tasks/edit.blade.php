@@ -61,6 +61,21 @@
             </select>
           </div>
 
+          <div class="form-group mt-2">
+            <label>{{ __('Project') }}</label>
+            <select class="form-control @error('project') is-invalid @enderror" name="project_id">
+              <option value="">{{ __('Select Project') }}</option>
+              @foreach ($projects as $project)
+                <option value="{{ $project->id }}" {{ old('project', $task->project_id) == $project->id ? 'selected' : '' }} data-test="{{ old('project', $task->project_id) }}">
+                  {{ $project->name }}
+                </option>
+              @endforeach
+            </select>
+            @error('project')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+          </div>
+
           <button type="submit" class="btn btn-primary mt-2">{{ __('Update Task') }}</button>
         </form>
       </div>
