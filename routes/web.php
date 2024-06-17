@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [TaskController::class, 'index'])->name('all-task');
-Route::delete('task/{id}', [TaskController::class, 'destroy'])->name('delete-task');
+Route::delete('task/{task}', [TaskController::class, 'destroy'])->name('delete-task');
 
 Route::get('task/new', [TaskController::class, 'new'])->name('show-add-task');
 Route::post('task/create', [TaskController::class, 'create'])->name('add-task');

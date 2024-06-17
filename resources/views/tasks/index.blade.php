@@ -59,22 +59,17 @@
           </td>
           <td>
             <a href="{{ route('edit-task', $task) }}" class="btn btn-primary">{{ __('Edit') }}</a>
-            <button class="btn btn-danger" onclick="confirmDelete({{ $task->id }})">{{ __('Delete') }}</button>
+            <button class="btn btn-danger" onclick="document.querySelector('#delete-form').click();">{{ __('Delete') }}</button>
           </td>
         </tr>
       @endforeach
       </tbody>
     </table>
-
   </div>
 @endsection
 
-@section('scripts')
-  <script>
-    function confirmDelete(taskId) {
-      if (confirm({{ __('Are you sure you want to delete this task?') }})) {
-        window.location.href = "{{ route('delete-task', ['id' => '__taskId__']) }}".replace('__taskId__', taskId);
-      }
-    }
-  </script>
-@endsection
+<form action="{{ route('delete-task', $task) }}" method="POST" onsubmit="return confirm('{{ __('Are you sure you want to delete this task?') }}');" class="d-none">
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+  <input type="submit" value="{{ __('Delete') }}" id="delete-form">
+</form>
