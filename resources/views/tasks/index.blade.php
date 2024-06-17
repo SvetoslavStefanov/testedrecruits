@@ -1,6 +1,7 @@
 @extends('layout')
-
-@section('title') __('All Task') @endsection
+@section('title')
+  {{ __('All Task') }}
+@endsection
 
 @section('content')
   <div class="container">

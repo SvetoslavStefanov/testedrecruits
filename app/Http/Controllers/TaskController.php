@@ -31,4 +31,30 @@ class TaskController extends Controller {
 
     return view('tasks/index', compact('tasks'));
   }
+
+  public function new() {
+    return view('tasks/new');
+  }
+
+  public function create(Request $request) {
+    $validatedData = $request->validate([
+      'name' => 'required|string',
+      'description' => 'string',
+      'dueDate' => 'required|date|after_or_equal:today',
+      'priority' => 'required|in:high,medium,low'
+    ]);
+
+    //default status is 'pending'
+    $validatedData['status'] = 'pending';
+
+    Tasks::create([
+      'name' => $validatedData['name'],
+      'description' => $validatedData['description'],
+      'due_date' => $validatedData['dueDate'],
+      'priority' => $validatedData['priority'],
+      'status' => $validatedData['status'],
+    ]);
+
+    return redirect()->route('all-task')->with('success', __('Task created successfully'));
+  }
 }
