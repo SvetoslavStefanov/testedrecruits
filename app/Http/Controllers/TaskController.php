@@ -30,7 +30,7 @@ class TaskController extends Controller {
       ];
     });
 
-    return view('tasks/index', compact('tasks'));
+    return view('tasks/index', ['tasks' => $tasks, 'project' => null]);
   }
 
   public function new() {
@@ -93,6 +93,6 @@ class TaskController extends Controller {
   }
 
   public function byProject(Projects $project) {
-    return view('by_project', ['project' => $project]);
+    return view('tasks/index', ['tasks' => $project->tasks, 'project' => $project]);
   }
 }

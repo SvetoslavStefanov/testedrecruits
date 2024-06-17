@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Projects extends Model {
   use HasFactory;
+  protected $table = 'projects';
   protected $fillable = [
     'name',
     'description',
@@ -15,6 +16,6 @@ class Projects extends Model {
   public $timestamps = true;
 
   public function tasks() {
-    return $this->hasMany(Tasks::class);
+    return $this->hasMany(Tasks::class, 'project_id');
   }
 }
