@@ -8,19 +8,12 @@
   <meta name="description" content="Tested Recruits">
   <title> @yield('title') | {{ Config::get('app.name') }} </title>
 
-  <!-- Scripts -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
   <!-- Fonts -->
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">
-  <!-- Styles -->
-  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-  <!-- bootstrap icon  -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 
+  @vite(['resources/scss/app.scss', 'resources/js/app.js'])
   @yield('styles')
 </head>
 
@@ -63,7 +56,4 @@
 </footer>
 
 @yield('scripts')
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 </body>
