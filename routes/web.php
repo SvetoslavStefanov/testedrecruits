@@ -24,5 +24,6 @@ Route::get('task/edit/{task}', [TaskController::class, 'edit'])->name('edit-task
 Route::put('task/update/{task}', [TaskController::class, 'update'])->name('update-task');
 
 Route::get('/task/by-project/{project}', [TaskController::class, 'byProject'])->name('tasks-by-project');
+Route::post('/task/reorder', [TaskController::class, 'reorder'])->name('tasks.reorder');
 
 Route::resource('projects', ProjectController::class);

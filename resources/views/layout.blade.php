@@ -63,7 +63,6 @@
 </footer>
 
 @yield('scripts')
-<!-- JavaScript Bundle with Popper -->
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>

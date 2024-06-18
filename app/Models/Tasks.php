@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tasks extends Model {
   use HasFactory;
+
   protected $fillable = [
     'name',
     'description',
@@ -20,5 +21,15 @@ class Tasks extends Model {
 
   public function project() {
     return $this->belongsTo(Projects::class);
+  }
+
+  public function getPriorityOrderAttribute(): int {
+    $priorityOrder = [
+      'high' => 1,
+      'medium' => 2,
+      'low' => 3,
+    ];
+
+    return $priorityOrder[$this->priority];
   }
 }

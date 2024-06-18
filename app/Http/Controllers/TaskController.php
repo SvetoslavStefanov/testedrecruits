@@ -9,26 +9,7 @@ use App\Models\Tasks;
 class TaskController extends Controller {
 
   public function index() {
-    $tasks = Tasks::latest()->get();
-
-    //Sort tasks
-    $tasks = $tasks->sortBy(function ($task) {
-      $priorityOrder = [
-        'high' => 1,
-        'medium' => 2,
-        'low' => 3,
-      ];
-
-      $statusOrder = [
-        'completed' => 2,
-        'canceled' => 2,
-      ];
-
-      return [
-        $statusOrder[$task->status] ?? 1, // Completed and canceled tasks have higher sort order
-        $priorityOrder[$task->priority],
-      ];
-    });
+    $tasks = Tasks::latest()->get()->sortBy('priority_order');
 
     return view('tasks/index', ['tasks' => $tasks, 'project' => null]);
   }
@@ -94,5 +75,14 @@ class TaskController extends Controller {
 
   public function byProject(Projects $project) {
     return view('tasks/index', ['tasks' => $project->tasks, 'project' => $project]);
+  }
+
+  public function reorder(Request $request) {
+    $startDraggedTask = Tasks::findOrFail((int) $request->start);
+    $endDraggedTask = Tasks::findOrFail((int) $request->end);
+
+    $startDraggedTask->update(['priority' => $endDraggedTask->priority]);
+
+    return response()->json(['success' => true]);
   }
 }
